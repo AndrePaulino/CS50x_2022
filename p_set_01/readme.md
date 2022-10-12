@@ -5,7 +5,7 @@
 
 - [x] Hello
 - [x] Mario (Less)
-- [ ] Mario (More)
+- [x] Mario (More)
 - [ ] Cash
 - [ ] Credit
 ## Description

@@ -29,6 +29,20 @@ int main(void)
                 printf(" ");
             }
         }
+
+        // Draw spacer
+        printf("  ");
+
+        // Count collumns forward
+        for (int j = 0; j < pyramid_height; j++)
+        {
+            // Check if its increasing to continue or draw
+            if (j >= i)
+            {
+                continue;
+            }
+            printf("#");
+        }
         printf("\n");
     }
 }
