@@ -1,2 +1,2 @@
 hello : hello.c
-	cc -o hello hello.c
+	cc -lcs50 -o hello hello.c
