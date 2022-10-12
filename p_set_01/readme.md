@@ -3,8 +3,8 @@
 
 ## Achievement
 
-- [ ] Hello
-- [ ] Mario (Less)
+- [x] Hello
+- [x] Mario (Less)
 - [ ] Mario (More)
 - [ ] Cash
 - [ ] Credit
