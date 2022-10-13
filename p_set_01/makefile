@@ -1,4 +1,4 @@
-p_set_01 : hello mario_less mario_more cash
+p_set_01 : hello mario_less mario_more cash credit
 
 hello : hello.c
 	cc -lcs50 -o hello hello.c
@@ -11,3 +11,6 @@ mario_more : mario_more.c
 
 cash : cash.c
 	cc -lcs50 -o cash cash.c
+
+credit : credit.c
+	cc -lcs50 -lm -o credit credit.c

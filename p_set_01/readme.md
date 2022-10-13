@@ -8,6 +8,7 @@
     - [Mario Less](#mario-less)
     - [Mario More](#mario-more)
     - [Cash](#cash)
+    - [Credit](#credit)
 ## Lecture
 [CS50x - Week 1](https://cs50.harvard.edu/x/2022/weeks/1/)
 ## Achievement
@@ -15,8 +16,8 @@
 - [x] Hello
 - [x] Mario (Less)
 - [x] Mario (More)
-- [ ] Cash
-- [ ] Credit
+- [x] Cash
+- [x] Credit
 ## Description
 
 1. Submit [Hello](https://cs50.harvard.edu/x/2022/psets/1/hello/)
@@ -38,3 +39,6 @@
 
 ### Cash
 <img src="../images/cash_result.png" alt="problem cash" height="100"/>
+
+### Credit
+<img src="../images/credit_result.png" alt="problem cash" height="100"/>
