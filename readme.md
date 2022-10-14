@@ -1,6 +1,6 @@
 # CS50x 2022 - Introduction to Computer Science
 <p align="center">
-	<img src="./images/H.png" alt="logo" height="150"/>
+	<img src="./images/harvard_logo.png" alt="logo" height="150"/>
 </p>
 
 <p align="center">
@@ -13,4 +13,8 @@
 
 ## Table of Contents
 
-- [Problem Set 1: C](/p_set_01/)
+- [Week 01: C](/week_01/)
+  - [Problem Set 01](/week_01/p_set_01/)
+- [Week 02: Arrays](/week_02/)
+  - [Problem Set 02](/week_02/p_set_02/)
+  - [Lab 02](/week_02/lab_02/)
