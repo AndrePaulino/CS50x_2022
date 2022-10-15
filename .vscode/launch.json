@@ -9,9 +9,9 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "/media/programas/CS50x_2022/p_set_01",
+      "cwd": "/media/programas/CS50x_2022/week_02/p_set_02",
       "environment": [],
-      "program": "/media/programas/CS50x_2022/p_set_01/build/Debug/outDebug",
+      "program": "/media/programas/CS50x_2022/week_02/p_set_02/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb",

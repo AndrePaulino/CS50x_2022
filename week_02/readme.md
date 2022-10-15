@@ -1,5 +1,5 @@
-# Problem Set Week 02
-- [Problem Set Week 02](#problem-set-week-02)
+# Week 02
+- [Week 02](#week-02)
   - [Lecture](#lecture)
   - [Achievement](#achievement)
   - [Description](#description)
@@ -15,7 +15,7 @@
 ## Achievement
 
 - [ ] Lab 2: Scrabble
-- [ ] Readability
+- [x] Readability
 - [ ] Caesar
 - [ ] Substitution
 
@@ -33,7 +33,7 @@
 <img src="../../images/scrabble_result.png" alt="lab scrabble" height="100"/>
 
 ### Readability
-<img src="../../images/readability_result.png" alt="problem readability" height="100"/>
+<img src="../images/readability_result.png" alt="problem readability" height="100"/>
 
 ### Caesar
 <img src="../../images/caesar_result.png" alt="problem caesar" height="100"/>
