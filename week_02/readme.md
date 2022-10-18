@@ -16,7 +16,7 @@
 
 - [ ] Lab 2: Scrabble
 - [x] Readability
-- [ ] Caesar
+- [x] Caesar
 - [ ] Substitution
 
 ## Description
@@ -30,13 +30,13 @@
 ## Results
 
 ### Lab 02: Scrabble
-<img src="../../images/scrabble_result.png" alt="lab scrabble" height="100"/>
+<img src="../images/scrabble_result.png" alt="lab scrabble" height="100"/>
 
 ### Readability
 <img src="../images/readability_result.png" alt="problem readability" height="100"/>
 
 ### Caesar
-<img src="../../images/caesar_result.png" alt="problem caesar" height="100"/>
+<img src="../images/caeser_result.png" alt="problem caesar" height="100"/>
 
 ### Substitution
-<img src="../../images/substitution_result.png" alt="problem substitution" height="100"/>
+<img src="../images/substitution_result.png" alt="problem substitution" height="100"/>
