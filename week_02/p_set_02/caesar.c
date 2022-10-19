@@ -14,7 +14,7 @@ int main(int argc, string argv[])
 
     unsigned int key;
     // Check programs parameters
-    // Check if theres's mor the one parameter (program name is 0)
+    // Check if theres's more the one parameter (program name is 0)
     if (argc != 2)
     {
         printf("Usage: ./caesar key\n");

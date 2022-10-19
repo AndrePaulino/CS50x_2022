@@ -14,10 +14,10 @@
 
 ## Achievement
 
-- [ ] Lab 2: Scrabble
+- [x] Lab 2: Scrabble
 - [x] Readability
 - [x] Caesar
-- [ ] Substitution
+- [x] Substitution
 
 ## Description
 
