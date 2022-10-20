@@ -1,5 +1,5 @@
-# Week 01
-- [Week 01](#week-01)
+# Week 01 - C
+- [Week 01 - C](#week-01---c)
   - [Lecture](#lecture)
   - [Achievement](#achievement)
   - [Description](#description)

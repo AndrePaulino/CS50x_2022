@@ -1,5 +1,5 @@
-# Week 02
-- [Week 02](#week-02)
+# Week 02 - Arrays
+- [Week 02 - Arrays](#week-02---arrays)
   - [Lecture](#lecture)
   - [Achievement](#achievement)
   - [Description](#description)
