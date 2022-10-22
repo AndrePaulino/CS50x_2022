@@ -1,11 +1,11 @@
-sort1 uses: TODO
+sort1 uses: bubble
 
-How do you know?: TODO
+How do you know?: sorting already sorted lists is much faster than non ones
 
-sort2 uses: TODO
+sort2 uses: merge
 
-How do you know?: TODO
+How do you know?: the sorting is considerably faster than others algorithms, and there's no difference between the runs on differently sorted lists
 
-sort3 uses: TODO
+sort3 uses: selection
 
-How do you know?: TODO
+How do you know?: the sorting time is consistante  between with different list, with no gain on already sorted data
