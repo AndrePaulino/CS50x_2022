@@ -1,10 +1,10 @@
-# Running time order
+# Time complexity
 | Selection Sort | Bubble Sort | Merge Sort |
 | :------------: | :---------: | :--------: |
 |     O(n²)      |    O(n²)    | O(n log n) |
 |     Ω(n²)      |    Ω(n)     | Ω(n log n) |
 
-# Sorting realtime
+# Realtime
 |     **Input**     | **sort1 time(s)** | **sort2 time(s)** | **sort3 time(s)** |
 | :---------------: | :---------------: | :---------------: | :---------------: |
 |  **random5000**   |        107        |        035        |        105        |
