@@ -1,4 +1,5 @@
 #include <cs50.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -10,8 +11,7 @@ typedef struct
 {
     string name;
     int votes;
-}
-candidate;
+} candidate;
 
 // Array of candidates
 candidate candidates[MAX];
@@ -66,13 +66,37 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (strcmp(name, candidates[i].name) == 0)
+        {
+            candidates[i].votes++;
+            return true;
+        }
+    }
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
-    return;
+    int most_voted_idx = 0;
+
+    // Bubble sort the most voted
+    for (int i = 1; i < candidate_count; i++)
+    {
+        if (candidates[i].votes > candidates[most_voted_idx].votes)
+        {
+            most_voted_idx = i;
+        }
+    }
+
+    // Print all with equal votes as the most voted
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == candidates[most_voted_idx].votes)
+        {
+            printf("%s\n", candidates[i].name);
+        }
+    }
 }

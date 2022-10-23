@@ -15,7 +15,7 @@
 ## Achievement
 
 - [x] Lab 3: Sort
-- [ ] Plurality
+- [x] Plurality
 - [ ] Runoff
 - [ ] Tideman
 
