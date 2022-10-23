@@ -2,6 +2,50 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "C: Debug (Single File)",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "program": "${fileDirname}/${fileBasenameNoExtension}Debug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "preLaunchTask": "C: Debug (Single File)",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C: Debug (Folder)",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "program": "${fileDirname}/${fileBasenameNoExtension}Debug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "preLaunchTask": "C: Debug (Folder)",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
@@ -9,12 +53,12 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "/media/programas/CS50x_2022/week_02/p_set_02",
+      "cwd": "/media/programas/CS50x_2022/week_03/p_set_03",
       "environment": [],
-      "program": "/media/programas/CS50x_2022/week_02/p_set_02/build/Debug/outDebug",
+      "program": "/media/programas/CS50x_2022/week_03/p_set_03/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb",
+      "miDebuggerPath": "gdb",
       "externalConsole": false,
       "setupCommands": [
         {
