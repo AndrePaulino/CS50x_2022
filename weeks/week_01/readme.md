@@ -34,16 +34,16 @@
 ## Results
 
 ### Hello
-<img src="../images/hello_result.png" alt="problem hello" height="100"/>
+<img src="../../images/hello_result.png" alt="problem hello" height="100"/>
 
 ### Mario Less
-<img src="../images/mario_less_result.png" alt="problem mario_less" height="100"/>
+<img src="../../images/mario_less_result.png" alt="problem mario_less" height="100"/>
 
 ### Mario More
-<img src="../images/mario_more_result.png" alt="problem mario_more" height="100"/>
+<img src="../../images/mario_more_result.png" alt="problem mario_more" height="100"/>
 
 ### Cash
-<img src="../images/cash_result.png" alt="problem cash" height="100"/>
+<img src="../../images/cash_result.png" alt="problem cash" height="100"/>
 
 ### Credit
-<img src="../images/credit_result.png" alt="problem cash" height="100"/>
+<img src="../../images/credit_result.png" alt="problem cash" height="100"/>

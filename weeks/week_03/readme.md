@@ -31,13 +31,13 @@
 ## Results
 
 ### Lab 03: Sort
-<img src="../images/sort_result.png" alt="lab sort" height="100"/>
+<img src="../../images/sort_result.png" alt="lab sort" height="100"/>
 
 ### Plurality
-<img src="../images/plurality_result.png" alt="problem plurality" height="100"/>
+<img src="../../images/plurality_result.png" alt="problem plurality" height="100"/>
 
 ### Runoff
-<img src="../images/runoff_result.png" alt="problem runoff" height="100"/>
+<img src="../../images/runoff_result.png" alt="problem runoff" height="100"/>
 
 ### Tideman
-<img src="../images/tideman_result.png" alt="problem tideman" height="100"/>
+<img src="../../images/tideman_result.png" alt="problem tideman" height="100"/>
