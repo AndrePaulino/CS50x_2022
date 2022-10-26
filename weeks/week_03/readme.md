@@ -17,7 +17,7 @@
 - [x] Lab 3: Sort
 - [x] Plurality
 - [x] Runoff
-- [ ] Tideman
+- [x] Tideman
 
 ## Description
 
