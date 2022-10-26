@@ -85,5 +85,8 @@
     "**/.vscode/**"
   ],
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
-  "C_Cpp_Runner.debuggerPath": "gdb"
+  "C_Cpp_Runner.debuggerPath": "gdb",
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
 }
