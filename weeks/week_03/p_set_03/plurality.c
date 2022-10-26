@@ -82,7 +82,7 @@ void print_winner(void)
 {
     int most_voted_idx = 0;
 
-    // Bubble sort the most voted
+    // Grab the most voted
     for (int i = 1; i < candidate_count; i++)
     {
         if (candidates[i].votes > candidates[most_voted_idx].votes)
