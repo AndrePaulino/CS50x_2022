@@ -1,7 +1,7 @@
 # CS50x 2022 - Introduction to Computer Science
 
 <p align="center">
-	<img src="./images/cs50_cover.png" alt="logo" height="150"/>
+	<img src="./images/cs50_cover.png" alt="logo" />
 
 </p>
 
