@@ -14,7 +14,7 @@
 
 ## Achievement
 
-- [ ] Lab 4: Volume
+- [x] Lab 4: Volume
 - [ ] Filter (Less)
 - [ ] Filter (More)
 - [ ] Recover
