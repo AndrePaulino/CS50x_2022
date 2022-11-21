@@ -17,7 +17,7 @@
 - [x] Lab 4: Volume
 - [x] Filter (Less)
 - [x] Filter (More)
-- [ ] Recover
+- [x] Recover
 
 ## Description
 
