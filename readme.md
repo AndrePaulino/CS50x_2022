@@ -26,9 +26,12 @@ Introduction to the intellectual enterprises of computer science and the art of 
 - [Week 03: Algorithms](weeks/week_03/)
   - [Lab 03](weeks/week_03/lab_03/)
   - [Problem Set 03](weeks/week_03/p_set_03/)
-- [Week 4: Memory](weeks/week_04/)
-  - [Lab 4](weeks/week_04/lab_04/)
-  - [Problem Set 4](weeks/week_04/p_set_04/)
+- [Week 04: Memory](weeks/week_04/)
+  - [Lab 04](weeks/week_04/lab_04/)
+  - [Problem Set 04](weeks/week_04/p_set_04/)
+- [Week 05: Data Structures](weeks/week_05/)
+  - [Lab 05](weeks/week_05/lab_05/)
+  - [Problem Set 05](weeks/week_05/p_set_05/)
 
 
 ## ⚙️ Covered on the course
