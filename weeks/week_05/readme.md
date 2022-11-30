@@ -12,7 +12,7 @@
 
 ## Achievement
 
-- [ ] Lab 5: Inheritance
+- [x] Lab 5: Inheritance
 - [ ] Speller
 
 ## Description
