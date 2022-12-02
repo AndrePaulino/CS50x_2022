@@ -13,7 +13,7 @@
 ## Achievement
 
 - [x] Lab 5: Inheritance
-- [ ] Speller
+- [x] Speller
 
 ## Description
 
