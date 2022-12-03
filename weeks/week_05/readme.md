@@ -6,6 +6,7 @@
 	- [Results](#results)
 		- [Lab 05: Inheritance](#lab-05-inheritance)
 		- [Speller](#speller)
+		- [Speller runtime:](#speller-runtime)
 
 ## Lecture
 [CS50x - Week 5](https://cs50.harvard.edu/x/2022/weeks/5/)
@@ -28,3 +29,6 @@
 
 ### Speller
 <img src="../../images/speller_result.png" alt="problem speller less" height="100"/>
+
+### Speller runtime:
+<img src="../../images/speller_time.png" alt="run time for the speller program" height="147"/>
