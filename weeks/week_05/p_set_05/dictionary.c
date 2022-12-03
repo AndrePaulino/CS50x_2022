@@ -18,8 +18,11 @@ typedef struct node
 
 void insert(node *n, int hashCode);
 
-// TODO: Choose number of buckets in hash table
-const unsigned int N = 187751;
+// Big prime number, big enough to bring down lookup time, but not enough to slow load and unload.
+enum
+{
+    N = 14293
+};
 unsigned int dict_size = 0;
 
 // Hash table
@@ -30,7 +33,7 @@ bool check(const char *word)
 {
     for (node *n = table[hash(word)]; n != NULL; n = n->next)
     {
-        if (strcasecmp(word, n->word) == 0)
+        if (strcmp(word, n->word) == 0)
         {
             return true;
         }
@@ -42,13 +45,19 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    //By Dr. Rob Edwards from San Diego State University.
-    unsigned int hash = 0;
-    for (int i = 0; i <= strlen(word); i++)
+    //Polynomial rolling hash function.
+    unsigned int hash_value = 0, sum = 0, p_pow = 1;
+    //Prime number close to the number of letters in the alphabet.
+    int p = 31;
+
+    for (int i = 0; i < strlen(word); i++)
     {
-        hash = (31 * hash + tolower(word[i])) % N;
+        sum += tolower(word[i]) * p_pow;
+        p_pow = (p_pow * p);
     }
-    return hash;
+    hash_value = sum % N;
+
+    return hash_value;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -94,23 +103,25 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
+    node *cursor;
+    node *tmp;
+
     for (int i = 0; i < N; i++)
     {
-        node *n = table[i];
-
-        while (n != NULL)
+        if (table[i] != NULL)
         {
-            node *tmpNode = n;
-            n = n->next;
-            free(tmpNode);
-        }
+            cursor = table[i];
 
-        if (i == N - 1 && n == NULL)
-        {
-            return true;
+            while (cursor != NULL)
+            {
+                tmp = cursor;
+                cursor = cursor->next;
+                free(tmp);
+            }
         }
     }
-    return false;
+
+    return true;
 }
 
 // Insert node into hash table
