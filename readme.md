@@ -32,6 +32,9 @@ Introduction to the intellectual enterprises of computer science and the art of 
 - [Week 05: Data Structures](weeks/week_05/)
   - [Lab 05](weeks/week_05/lab_05/)
   - [Problem Set 05](weeks/week_05/p_set_05/)
+- [Week 06: Python](weeks/week_06/)
+  - [Lab 06](weeks/week_06/lab_06/)
+  - [Problem Set 06](weeks/week_06/p_set_06/)
 
 
 ## ⚙️ Covered on the course
