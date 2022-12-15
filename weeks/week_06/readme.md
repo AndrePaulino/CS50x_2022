@@ -11,18 +11,19 @@
 		- [Sentimental - Cash](#sentimental---cash)
 		- [Sentimental - Credit](#sentimental---credit)
 		- [Sentimental - Readability](#sentimental---readability)
+		- [DNA](#dna)
 
 ## Lecture
 [CS50x - Week 6](https://cs50.harvard.edu/x/2022/weeks/6/)
 ## Achievement
 
 - [x] Lab 6: World Cup
-- [ ] Sentimental - Hello
-- [ ] Sentimental - Mario (Less)
-- [ ] Sentimental - Mario (More)
-- [ ] Sentimental - Cash
-- [ ] Sentimental - Credit
-- [ ] Sentimental - Readability
+- [x] Sentimental - Hello
+- [x] Sentimental - Mario (Less)
+- [x] Sentimental - Mario (More)
+- [x] Sentimental - Cash
+- [x] Sentimental - Credit
+- [x] Sentimental - Readability
 - [ ] DNA
 
 ## Description
@@ -47,16 +48,19 @@
 <img src="../../images/sentimental_hello_result.png" alt="problem sentimental hello" height="100"/>
 
 ### Sentimental - Mario (Less)
-<img src="../../images/sentimental_mario_less_restult.png" alt="problem sentimental mario less" height="100"/>
+<img src="../../images/sentimental_mario_less_result.png" alt="problem sentimental mario less" height="100"/>
 
 ### Sentimental - Mario (More)
-<img src="../../images/sentimental_mario_more_restult.png" alt="problem sentimental mario more" height="100"/>
+<img src="../../images/sentimental_mario_more_result.png" alt="problem sentimental mario more" height="100"/>
 
 ### Sentimental - Cash
-<img src="../../images/sentimental_cash_restult.png" alt="problem sentimental cash" height="100"/>
+<img src="../../images/sentimental_cash_result.png" alt="problem sentimental cash" height="100"/>
 
 ### Sentimental - Credit
-<img src="../../images/sentimental_credit_restult.png" alt="problem sentimental credit" height="100"/>
+<img src="../../images/sentimental_credit_result.png" alt="problem sentimental credit" height="100"/>
 
 ### Sentimental - Readability
-<img src="../../images/sentimental_readability_restult.png" alt="problem sentimental readability" height="100"/>
+<img src="../../images/sentimental_readability_result.png" alt="problem sentimental readability" height="100"/>
+
+### DNA
+<img src="../../images/dna_result.png" alt="problem dna" height="100"/>
