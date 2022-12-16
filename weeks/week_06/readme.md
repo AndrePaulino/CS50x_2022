@@ -24,7 +24,7 @@
 - [x] Sentimental - Cash
 - [x] Sentimental - Credit
 - [x] Sentimental - Readability
-- [ ] DNA
+- [x] DNA
 
 ## Description
 
