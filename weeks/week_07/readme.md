@@ -13,7 +13,7 @@
 ## Achievement
 
 - [x] Lab 07: Songs
-- [ ] Movies
+- [x] Movies
 - [ ] Fiftyville
 
 ## Description
@@ -27,7 +27,7 @@
 ## Results
 
 ### Lab 07: Songs
-<img src="../../images/songs_result.png" alt="lab worldcup" height="100"/>
+<img src="../../images/songs_result.png" alt="lab songs" height="100"/>
 
 ### Movies
 <img src="../../images/movies_result.png" alt="problem movies" height="100"/>
