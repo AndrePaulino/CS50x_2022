@@ -5,7 +5,10 @@
 
 </p>
 
-Introduction to the intellectual enterprises of computer science and the art of programming. This course teaches students how to think algorithmically and solve problems efficiently.
+This repository is the collection of my solutions as I go through the CS50x course.
+
+CS50 is a introduction to the intellectual enterprises of computer science and the art of programming. This course teaches students how to think algorithmically and solve problems efficiently.
+
 
 <p align="center">
 	<a href="https://cs50.harvard.edu/x/2022/">Course</a>
@@ -15,7 +18,7 @@ Introduction to the intellectual enterprises of computer science and the art of 
 	<a href="https://cs50.readthedocs.io/style/c/">Style Guide</a>
 </p>
 
-> A quick word on [Academic Honesty](https://cs50.harvard.edu/x/2020/honesty/). While these solutions will help you to get through the course without too much effort, you should do your best to figure out a working solution yourself before taking a look at any of my solutions. Investing your time and energy into solving the problem sets yourself is in my opinion the only way to eventual mastery.
+> A quick word on [Academic Honesty](https://cs50.harvard.edu/x/2020/honesty/). While these solutions can help you to get through the course, you should do your best to figure out a viable answer before taking a look at any of these. Investing time and energy into solving the problem sets yourself is, in my opinion, the best way to true learning.
 
 ## 📋 Table of Contents
 - [Week 01: C](weeks/week_01/)
@@ -35,6 +38,9 @@ Introduction to the intellectual enterprises of computer science and the art of 
 - [Week 06: Python](weeks/week_06/)
   - [Lab 06](weeks/week_06/lab_06/)
   - [Problem Set 06](weeks/week_06/p_set_06/)
+- [Week 07: SQL](weeks/week_07/)
+  - [Lab 07](weeks/week_07/lab_07/)
+  - [Problem Set 07](weeks/week_07/p_set_07/)
 
 
 ## ⚙️ Covered on the course
