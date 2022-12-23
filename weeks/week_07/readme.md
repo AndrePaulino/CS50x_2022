@@ -14,7 +14,7 @@
 
 - [x] Lab 07: Songs
 - [x] Movies
-- [ ] Fiftyville
+- [x] Fiftyville
 
 ## Description
 
@@ -33,4 +33,4 @@
 <img src="../../images/movies_result.png" alt="problem movies" height="100"/>
 
 ### Fiftyville
-<img src="../../images/fiftyville_less_result.png" alt="problem fiftyville" height="100"/>
+<img src="../../images/fiftyville_result.png" alt="problem fiftyville" height="100"/>
