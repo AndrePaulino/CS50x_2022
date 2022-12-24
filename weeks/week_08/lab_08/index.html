@@ -1,31 +1,120 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-        <link href="styles.css" rel="stylesheet">
-        <title>Trivia!</title>
-        <script>
-            // TODO: Add code to check answers to questions
-        </script>
-    </head>
-    <body>
-        <div class="header">
-            <h1>Trivia!</h1>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+		<link href="styles.css" rel="stylesheet" />
+		<title>Christmas Trivia!</title>
+	</head>
+	<body>
+		<div class="header">
+			<h1>Christmas Trivia!</h1>
+		</div>
 
-        <div class="container">
-            <div class="section">
-                <h2>Part 1: Multiple Choice </h2>
-                <hr>
-                <!-- TODO: Add multiple choice question here -->
-            </div>
+		<div class="container">
+			<div class="section">
+				<h2>Part 1: Multiple Choice</h2>
+				<hr />
+				<!-- Single Question -->
+				<div>
+					<h3>How many reindeer are in Santa's sleigh?</h3>
+					<p class="feedback"></p>
+					<button type="button">Seven</button>
+					<button type="button">Nine</button>
+					<button data-is-correct="true" type="button">Eight</button>
+					<button type="button">Six</button>
+				</div>
+				<!-- Single Question -->
+				<div>
+					<h3>How many ghosts show up in A Christmas Carol?</h3>
+					<p class="feedback"></p>
+					<button type="button">Two</button>
+					<button data-is-correct="true" type="button">Four</button>
+					<button type="button">Five</button>
+					<button type="button">Three</button>
+				</div>
+				<!-- Single Question -->
+				<div>
+					<h3>
+						What do people traditionally put on top of a Christmas
+						tree?
+					</h3>
+					<p class="feedback"></p>
+					<button type="button">Sock</button>
+					<button type="button">Snowball</button>
+					<button type="button">Star</button>
+					<button data-is-correct="true" type="button">Angel</button>
+				</div>
+			</div>
 
-            <div class="section">
-                <h2>Part 2: Free Response</h2>
-                <hr>
-                <!-- TODO: Add free response question here -->
-            </div>
-        </div>
-    </body>
+			<div class="section">
+				<h2>Part 2: Free Response</h2>
+				<hr />
+				<!-- Single Question -->
+				<div class="free-response" data-id="0">
+					<h3>What is the most recorded song?</h3>
+					<p class="feedback"></p>
+					<input placeholder="Answer" type="text" />
+					<button type="submit">Check</button>
+				</div>
+				<!-- Single Question -->
+				<div class="free-response" data-id="1">
+					<h3>
+						In Home Alone, where are the McCallisters going on
+						vacation when they leave Kevin behind?
+					</h3>
+					<p class="feedback"></p>
+					<input placeholder="Answer" type="text" />
+					<button type="submit">Check</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const answerButtons = document.querySelectorAll("[type=button]");
+			answerButtons.forEach((button) => {
+				button.addEventListener("click", () => {
+					const isCorrect = button.dataset.isCorrect ? true : false;
+					const feedback =
+						button.parentElement.querySelector("p:first-of-type");
+					console.log(feedback);
+					if (!isCorrect) {
+						button.style.backgroundColor = "red";
+						feedback.textContent = "Incorrect.";
+					} else {
+						button.style.backgroundColor = "green";
+						feedback.textContent = "Correct!";
+					}
+				});
+			});
+
+			const freeResponseAnswers = ["silent night", "paris"];
+			const freeResponseQuestions =
+				document.querySelectorAll(".free-response");
+			freeResponseQuestions.forEach((question) => {
+				const button = question.querySelector("button");
+				button.addEventListener("click", () => {
+					const feedback = question.querySelector("p:first-of-type");
+					const input = question.querySelector("input");
+					const id = Number(question.dataset.id);
+					const userAnswer = input.value.trim().toLowerCase();
+					const corretAnswer = freeResponseAnswers[id];
+
+					if (corretAnswer !== userAnswer) {
+						input.style.backgroundColor = "red";
+						feedback.textContent = "Incorrect.";
+					} else {
+						input.style.backgroundColor = "green";
+						feedback.textContent = "Correct!";
+					}
+				});
+			});
+		</script>
+	</body>
 </html>
