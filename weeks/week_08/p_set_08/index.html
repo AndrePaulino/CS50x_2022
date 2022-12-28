@@ -1,13 +1,137 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <link href="styles.css" rel="stylesheet">
-        <title>My Webpage</title>
-    </head>
-    <body>
-        hello, homepage
-    </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+			crossorigin="anonymous"
+			defer
+		></script>
+
+		<link href="styles.css" rel="stylesheet" />
+		<script src="app.js" defer></script>
+		<title>Problem Set 08</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<div class="container text-uppercase">
+				<a class="navbar-brand fs-4" href="#">My Page</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarNav"
+					aria-label="Toggle navigation"
+				>
+					<i class="navbar-toggler-icon"></i>
+				</button>
+				<div class="collapse navbar-collapse fs-5" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="about.html">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="contact.html">Contact</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<body>
+			<body>
+				<header class="">
+					<div class="mt-5 container">
+						<h1 class="display-3">My CS50 Problem Set 08</h1>
+					</div>
+				</header>
+				<main class="container">
+					<div class="mb-4 mt-4 rounded-3">
+						<div class="container-fluid py-3">
+							<h2 class="mb-4 display-5 fw-bold">CS50</h2>
+							<p class="mb-4 col-md-10 fs-4 lead">
+								The CS50 course at Harvard is an awesome way to
+								learn computer science. It covers a wide range
+								of topics, including algorithms, computer
+								architecture, data structures, databases, and
+								web development. The course is taught by
+								world-renowned professors and includes engaging
+								lectures, interactive problem sets, and hands-on
+								projects. Whether you are a beginner or an
+								experienced programmer, you will learn a lot
+								from this course and have fun doing it.
+							</p>
+							<a
+								class="btn btn-primary btn-lg"
+								href="https://cs50.harvard.edu/x/2022/"
+								>Go to the course</a
+							>
+						</div>
+					</div>
+
+					<div class="container col-xxl-8 px-4 py-5">
+						<div
+							class="row flex-lg-row-reverse align-items-center g-5 py-5"
+						>
+							<div class="col-10 col-sm-8 col-lg-6">
+								<img
+									src="hero.jpg"
+									class="d-block mx-lg-auto img-fluid rounded"
+									alt="Bootstrap Themes"
+									width="700"
+									height="500"
+									loading="lazy"
+								/>
+							</div>
+							<div class="col-lg-6">
+								<h1 class="display-5 fw-bold lh-1 mb-3">
+									Webpage using bootstrap
+								</h1>
+								<p class="lead">
+									As per problem set 08 CS50's problem set 08
+									this is my webpage, using tags as main, div,
+									img, buttons and more. And harnessing the
+									power of bootstrap.
+								</p>
+								<div
+									class="d-grid gap-2 d-md-flex justify-content-md-start"
+								>
+									<a
+										class="btn btn-primary btn-lg px-4 me-md-2"
+										target="_blank"
+										href="https://cs50.harvard.edu/x/2022/psets/8/homepage/"
+										>Problem Set</a
+									>
+									<a
+										class="btn btn-outline-light btn-lg px-4"
+										target="_blank"
+										href="https://getbootstrap.com/"
+										>Bootstrap</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</body>
+
+			<footer class="py-2 pt-5 mt-5">
+				<div class="container">
+					<p class="text-center mb-0">By André Paulino</p>
+				</div>
+			</footer>
+		</body>
+	</body>
 </html>

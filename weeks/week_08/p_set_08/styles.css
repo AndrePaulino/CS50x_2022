@@ -1,0 +1,13 @@
+/* Style the navbar menu when it is shown */
+.navbar-collapse.show {
+    display: block;
+}
+
+textarea.form-control {
+    height: 8rem !important;
+}
+
+body {
+    background-color: var(--bs-dark);
+    color: var(--bs-gray-100);
+}
