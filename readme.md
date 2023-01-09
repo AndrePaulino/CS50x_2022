@@ -41,6 +41,9 @@ CS50 is a introduction to the intellectual enterprises of computer science and t
 - [Week 07: SQL](weeks/week_07/)
   - [Lab 07](weeks/week_07/lab_07/)
   - [Problem Set 07](weeks/week_07/p_set_07/)
+- [Week 08: HTML, CSS, JavaScript](weeks/week_08/)
+  - [Lab 08](weeks/week_08/lab_08/)
+  - [Problem Set 08](weeks/week_08/p_set_08/)
 
 
 ## ⚙️ Covered on the course
