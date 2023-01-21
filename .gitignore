@@ -95,4 +95,4 @@ dkms.conf
 
 .clang-format
 **/ref
-todo.md
+**/__pycache__/**
