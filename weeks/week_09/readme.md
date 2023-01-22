@@ -4,7 +4,7 @@
   - [Achievement](#achievement)
   - [Description](#description)
   - [Results](#results)
-    - [Lab 09: Birthdays](#lab-09-birthdays)
+    - [Lab 09: Birthdays - DEMO](#lab-09-birthdays---demo)
     - [Homepage Finance](#homepage-finance)
 
 ## Lecture
@@ -23,7 +23,7 @@
 
 [Comentario]: # (TODO: Adicionar prints)
 
-### Lab 09: Birthdays
+### Lab 09: Birthdays - [DEMO](https://birthdaycalendar.vercel.app/)
 <img src="../../images/birthdays_result.png" alt="lab birthdays" height="100"/>
 <img src="../../images/birthdays_preview.png" alt="lab 09 birthdays preview" height="450"/>
 
