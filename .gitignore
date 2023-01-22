@@ -96,7 +96,3 @@ dkms.conf
 .clang-format
 **/ref
 **/__pycache__/**
-**/include/**
-**/Lib/**
-**/Scripts/**
-.vercel
