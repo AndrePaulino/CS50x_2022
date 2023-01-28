@@ -21,9 +21,12 @@
 
 ## Results
 
-[Comentario]: # (TODO: Adicionar prints)
+[Comentario]: # (TODO: Adicionar check50 prints)
 
 ### Lab 09: Birthdays - [DEMO](https://birthdaycalendar.vercel.app/)
+
+Vercel does not support local storage the SQLite needs for writing operations, so adding to the database does not work on this deploy.
+
 <img src="../../images/birthdays_result.png" alt="lab birthdays" height="100"/>
 <img src="../../images/birthdays_preview.png" alt="lab 09 birthdays preview" height="450"/>
 
