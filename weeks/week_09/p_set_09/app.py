@@ -99,6 +99,39 @@ def logout():
     return redirect("/")
 
 
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Register user"""
+
+    if request.method == "GET":
+        return render_template("register.html")
+
+    if request.method == "POST":
+        username = request.form.get("username")
+        if not username:
+            return apology("not valid", "username")
+
+        db_username = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if db_username == username:
+            return apology("already exists", "username")
+
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        if not password or not confirmation:
+            return apology("not valid", "password")
+
+        if password != confirmation:
+            return apology("does not match", "password")
+
+        password_hash = generate_password_hash(password)
+        db.execute(
+            "INSERT INTO users (username, hash) VALUES (?, ?)", username, password_hash
+        )
+    return redirect("/login")
+
+
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
