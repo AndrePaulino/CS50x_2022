@@ -41,6 +41,53 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
 
+@app.route("/buy", methods=["GET", "POST"])
+@login_required
+def buy():
+    """Buy shares of stock"""
+
+    if request.method == "GET":
+        return render_template("buy.html")
+
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = int(request.form.get("shares"))
+        quoted = lookup(symbol)
+        if not symbol or not quoted:
+            return apology("not valid", "symbol")
+
+        if not shares or shares <= 0:
+            return apology("not valid", "share quantity")
+
+        total_price = quoted["price"] * shares
+
+        user_balance = db.execute(
+            "SELECT cash FROM users WHERE id = ?", session["user_id"]
+        )[0]["cash"]
+        if total_price > user_balance:
+            return apology("balance", "insufficient")
+
+        new_balance = user_balance - total_price
+        try:
+            db.execute(
+                "UPDATE users SET cash = ? WHERE id = ?",
+                new_balance,
+                session["user_id"],
+            )
+            db.execute(
+                "INSERT INTO transactions (symbol, company, shares, user_id, price) VALUES (?, ?, ?, ?, ?)",
+                symbol,
+                quoted["company"],
+                shares,
+                session["user_id"],
+                quoted["price"],
+            )
+        except Exception:
+            return apology("error", "transaction")
+
+        return redirect("/")
+
+
 @app.route("/history")
 @login_required
 def history():
