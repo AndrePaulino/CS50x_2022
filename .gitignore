@@ -97,3 +97,5 @@ dkms.conf
 **/ref
 **/__pycache__/**
 .vercel
+.env
+todo.md
