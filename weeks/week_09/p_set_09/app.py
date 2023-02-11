@@ -53,6 +53,9 @@ def buy():
         symbol = request.form.get("symbol")
         shares = int(request.form.get("shares"))
         quoted = lookup(symbol)
+        if not quoted["isMarketOpen"]:
+            return apology("closed", "market")
+
         if not symbol or not quoted:
             return apology("not valid", "symbol")
 

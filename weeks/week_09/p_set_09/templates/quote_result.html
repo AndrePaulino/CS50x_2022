@@ -6,7 +6,11 @@
         <p>Previous Close</p>
     </div>
     <div>
+        {% if quoted.isMarketOpen %}
         <h1>{{quoted.price}}</h1>
         <p>Current price</p>
+        {% else %}
+        <h1>Market is CLOSED</h1>
+        {% endif %}
     </div>
 </div>

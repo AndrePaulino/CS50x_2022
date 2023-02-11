@@ -62,13 +62,15 @@ def lookup(symbol):
     # Parse response
     try:
         quote = response.json()
+
         return {
             "company": quote["companyName"],
-            "previousClose": float(quote["previousClose"]),
+            "previousClose": quote["previousClose"],
             "symbol": quote["symbol"],
             "currency": quote["currency"],
             "primaryExchange": quote["primaryExchange"],
             "price": quote["iexRealtimePrice"],
+            "isMarketOpen": quote["isUSMarketOpen"],
         }
     except (KeyError, TypeError, ValueError):
         return None
