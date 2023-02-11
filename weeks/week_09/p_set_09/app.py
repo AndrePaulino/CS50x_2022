@@ -41,6 +41,39 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
 
+
+@app.route("/")
+@login_required
+def index():
+    """Show portfolio of stocks"""
+
+    stocks_owned = db.execute(
+        "SELECT symbol, company, COUNT(shares), SUM(price) FROM transactions WHERE user_id = ? GROUP BY company",
+        session["user_id"],
+    )
+
+    cash = db.execute("SELECT cash from users WHERE id = ?", session["user_id"])[0]["cash"]
+    print(cash)
+    grand_total = cash
+
+    for stock in stocks_owned:
+        quote = lookup(stock["symbol"])
+        price = quote["price"] if quote["isMarketOpen"] else quote["previousClose"]
+        stock["current_price"] = price
+        stock["holding_value"] = stock["COUNT(shares)"] * price
+        stock["holding_growth"] = stock["holding_value"] - stock["SUM(price)"]
+        stock["holding_growth_percent"] = (stock["holding_growth"] * 100) / stock["SUM(price)"]
+
+        grand_total += stock["holding_value"]
+
+    capital = {
+        "cash": cash,
+        "grand_total": round(grand_total, 2)
+    }
+
+    return render_template("index.html", stocks_owned=stocks_owned, capital=capital)
+
+
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
