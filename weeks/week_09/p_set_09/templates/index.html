@@ -5,5 +5,39 @@ Home
 {% endblock %}
 
 {% block main %}
-<h1>{{stocks_owned}}</h1>
-<h1>{{capital}}</h1>
+<h1 class="mb-5">Your Stock Portfolio</h1>
+<div class="row">
+    <div class="container col-lg-4">
+        <h1>{{capital}}</h1>
+    </div>
+
+    <div class="container col-lg-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Company</th>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Shares Owned</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">Exposure</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Growth</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks_owned %}
+                <tr>
+                    <td>{{stock["company"]}}</td>
+                    <td>{{stock["symbol"]|upper}}</td>
+                    <td>{{stock["shares"]}}</td>
+                    <td>${{stock["current_price"]|round(2)}}</td>
+                    <td>${{stock["exposure"]|round(2)}}</td>
+                    <td>${{stock["holding_value"]|round(2)}}</td>
+                    <td>${{stock["holding_growth"]|round(2)}} or {{stock["holding_growth_percent"]|round(2)}}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
