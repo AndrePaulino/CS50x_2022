@@ -48,7 +48,7 @@ def index():
     """Show portfolio of stocks"""
 
     stocks_owned = db.execute(
-        "SELECT symbol, company, COUNT(shares), SUM(price) FROM transactions WHERE user_id = ? GROUP BY company",
+        "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM transactions WHERE user_id = ? GROUP BY company",
         session["user_id"],
     )
 
@@ -60,9 +60,9 @@ def index():
         quote = lookup(stock["symbol"])
         price = quote["price"] if quote["isMarketOpen"] else quote["previousClose"]
         stock["current_price"] = price
-        stock["holding_value"] = stock["COUNT(shares)"] * price
-        stock["holding_growth"] = stock["holding_value"] - stock["SUM(price)"]
-        stock["holding_growth_percent"] = (stock["holding_growth"] * 100) / stock["SUM(price)"]
+        stock["holding_value"] = stock["shares"] * price
+        stock["holding_growth"] = stock["holding_value"] - stock["exposure"]
+        stock["holding_growth_percent"] = (stock["holding_growth"] * 100) / stock["exposure"]
 
         grand_total += stock["holding_value"]
 
