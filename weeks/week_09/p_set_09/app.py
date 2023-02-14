@@ -258,7 +258,11 @@ def sell():
         if not symbol or not quoted:
             return apology("not valid", "symbol")
 
-        shares_owned = db.execute("SELECT SUM(shares) AS shares FROM transactions WHERE symbol = ? AND user_id = ?", symbol, session["user_id"])
+        shares_owned = db.execute(
+            "SELECT SUM(shares) AS shares FROM transactions WHERE symbol = ? AND user_id = ?",
+            symbol,
+            session["user_id"],
+        )
         if not shares or shares <= 0 or shares > shares_owned:
             return apology("not valid", "share quantity")
 
