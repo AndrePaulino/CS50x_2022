@@ -1,16 +1,20 @@
 <h3>{{quoted.company}}({{quoted.symbol}})</h3>
 <p>{{quoted.primaryExchange}} - Currency in {{quoted.currency}}</p>
-<div>
-    <div>
-        <h1>{{quoted.previousClose}}</h1>
+<div class="mt-5">
+    <div class="my-5">
+        <span class="display-4">
+            {{quoted.previousClose}}
+        </span>
         <p>Previous Close</p>
     </div>
-    <div>
+    <div class="my-4">
         {% if quoted.isMarketOpen %}
-        <h1>{{quoted.price}}</h1>
+        <span class="display-4">
+            {{quoted.price}}
+        </span>
         <p>Current price</p>
         {% else %}
-        <h1>Market is CLOSED</h1>
+        <p class="display-6">Market is CLOSED</p>
         {% endif %}
     </div>
 </div>
