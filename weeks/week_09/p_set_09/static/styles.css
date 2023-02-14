@@ -1,7 +1,5 @@
-nav .navbar-brand
-{
-    /* size for brand */
-    font-size: xx-large;
+body {
+	font-family: "Roboto" !important;
 }
 
 /* Colors for brand */
@@ -44,4 +42,8 @@ main img
 {
     /* Constrain images on small screens */
     max-width: 100%;
+}
+
+td {
+	font-family: "Roboto Mono" !important;
 }
