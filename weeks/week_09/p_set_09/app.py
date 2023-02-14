@@ -52,9 +52,11 @@ def index():
         session["user_id"],
     )
 
-    cash = db.execute("SELECT cash from users WHERE id = ?", session["user_id"])[0]["cash"]
+    cash = db.execute("SELECT cash from users WHERE id = ?", session["user_id"])[0][
+        "cash"
+    ]
     print(cash)
-    grand_total = cash
+    portfolio_value = 0
 
     for stock in stocks_owned:
         quote = lookup(stock["symbol"])
@@ -62,13 +64,16 @@ def index():
         stock["current_price"] = price
         stock["holding_value"] = stock["shares"] * price
         stock["holding_growth"] = stock["holding_value"] - stock["exposure"]
-        stock["holding_growth_percent"] = (stock["holding_growth"] * 100) / stock["exposure"]
+        stock["holding_growth_percent"] = (stock["holding_growth"] * 100) / stock[
+            "exposure"
+        ]
 
-        grand_total += stock["holding_value"]
+        portfolio_value += stock["holding_value"]
 
     capital = {
         "cash": cash,
-        "grand_total": round(grand_total, 2)
+        "portfolio_value": round(portfolio_value, 2),
+        "grand_total": round(portfolio_value + cash, 2),
     }
 
     return render_template("index.html", stocks_owned=stocks_owned, capital=capital)
