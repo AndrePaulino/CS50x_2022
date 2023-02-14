@@ -48,7 +48,7 @@ def index():
     """Show portfolio of stocks"""
 
     stocks_owned = db.execute(
-        "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM transactions WHERE user_id = ? GROUP BY company",
+        "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM transactions WHERE user_id = ? AND shares > 0 GROUP BY company",
         session["user_id"],
     )
 
@@ -239,7 +239,48 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+
+    if request.method == "GET":
+        stocks_owned = db.execute(
+            "SELECT symbol, company, SUM(shares) AS shares FROM transactions WHERE user_id = ? GROUP BY company",
+            session["user_id"],
+        )
+        return render_template("sell.html", stocks_owned=stocks_owned)
+
+    if request.method == "POST":
+        symbol = request.form.get("stock")
+        shares = int(request.form.get("shares"))
+        quoted = lookup(symbol)
+
+        if not quoted["isMarketOpen"]:
+            return apology("closed", "market")
+
+        if not symbol or not quoted:
+            return apology("not valid", "symbol")
+
+        shares_owned = db.execute("SELECT SUM(shares) AS shares FROM transactions WHERE symbol = ? AND user_id = ?", symbol, session["user_id"])
+        if not shares or shares <= 0 or shares > shares_owned:
+            return apology("not valid", "share quantity")
+
+        sale_value = quoted["price"] * shares
+        try:
+            db.execute(
+                "UPDATE users SET cash = cash + ? WHERE id = ?",
+                sale_value,
+                session["user_id"],
+            )
+            db.execute(
+                "INSERT INTO transactions (symbol, company, shares, user_id, price) VALUES (?, ?, ?, ?, ?)",
+                symbol,
+                quoted["company"],
+                -shares,
+                session["user_id"],
+                quoted["price"],
+            )
+        except Exception:
+            return apology("error", "transaction")
+
+        return redirect("/")
 
 
 def errorhandler(e):
