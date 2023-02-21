@@ -46,7 +46,6 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
-
     stocks_owned = db.execute(
         "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM transactions WHERE user_id = ? AND shares > 0 GROUP BY company",
         session["user_id"],
@@ -55,12 +54,11 @@ def index():
     cash = db.execute("SELECT cash from users WHERE id = ?", session["user_id"])[0][
         "cash"
     ]
-    print(cash)
     portfolio_value = 0
 
     for stock in stocks_owned:
         quote = lookup(stock["symbol"])
-        price = quote["price"] if quote["isMarketOpen"] else quote["previousClose"]
+        price = quote["price"] if quote["is_market_open"] else quote["previous_close"]
         stock["current_price"] = price
         stock["holding_value"] = stock["shares"] * price
         stock["holding_growth"] = stock["holding_value"] - stock["exposure"]
@@ -91,7 +89,7 @@ def buy():
         symbol = request.form.get("symbol")
         shares = int(request.form.get("shares"))
         quoted = lookup(symbol)
-        if not quoted["isMarketOpen"]:
+        if not quoted["is_market_open"]:
             return apology("closed", "market")
 
         if not symbol or not quoted:
@@ -252,7 +250,7 @@ def sell():
         shares = int(request.form.get("shares"))
         quoted = lookup(symbol)
 
-        if not quoted["isMarketOpen"]:
+        if not quoted["is_market_open"]:
             return apology("closed", "market")
 
         if not symbol or not quoted:

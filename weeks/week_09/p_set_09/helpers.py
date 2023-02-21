@@ -53,24 +53,42 @@ def lookup(symbol):
     # Contact API
     try:
         api_key = os.getenv("API_KEY")
-        url = f"https://cloud.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}"
-        response = requests.get(url)
-        response.raise_for_status()
+        url_quote = "https://api.twelvedata.com/quote"
+        url_price = "https://api.twelvedata.com/price"
+
+        query_string_price = {
+            "apikey": {api_key},
+            "symbol": {symbol},
+            "dp": 2,
+        }
+
+        query_string_quote = {
+            "apikey": {api_key},
+            "symbol": {symbol},
+            "interval": "1min",
+            "dp": 2,
+        }
+
+        response_quote = requests.request("GET", url_quote, params=query_string_quote)
+        response_price = requests.request("GET", url_price, params=query_string_price)
+
+        response_quote.raise_for_status()
+        response_price.raise_for_status()
     except requests.RequestException:
         return None
 
     # Parse response
     try:
-        quote = response.json()
-
+        quote = response_quote.json()
+        price = response_price.json()
         return {
-            "company": quote["companyName"],
-            "previousClose": quote["previousClose"],
+            "company": quote["name"],
+            "previous_close": float(quote["previous_close"]),
             "symbol": quote["symbol"],
             "currency": quote["currency"],
-            "primaryExchange": quote["primaryExchange"],
-            "price": quote["iexRealtimePrice"],
-            "isMarketOpen": quote["isUSMarketOpen"],
+            "exchange": quote["exchange"],
+            "price": float(price["price"]),
+            "is_market_open": quote["is_market_open"],
         }
     except (KeyError, TypeError, ValueError):
         return None
