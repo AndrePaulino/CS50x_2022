@@ -1,6 +1,7 @@
 import os
+import mysql.connector
 
-from cs50 import SQL
+from mysql.connector import errorcode
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
@@ -14,7 +15,6 @@ app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 
 # Ensure responses aren't cached
 @app.after_request
@@ -34,8 +34,18 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+try:
+    mysql_db = mysql.connector.connect(
+        host="localhost", user="apaulino", password="9632", db="p_set_09_finance"
+    )
+    db = mysql_db.cursor(dictionary=True)
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    else:
+        print(err)
 
 # Make sure API key is set
 if not os.environ.get("API_KEY"):
@@ -46,14 +56,13 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    stocks_owned = db.execute(
-        "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM transactions WHERE user_id = ? AND shares > 0 GROUP BY company",
-        session["user_id"],
-    )
+    sql = "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM Transactions WHERE user_id = %s AND shares > 0 GROUP BY company"
+    db.execute(sql, [session["user_id"]])
+    stocks_owned = db.fetchall()
 
-    cash = db.execute("SELECT cash from users WHERE id = ?", session["user_id"])[0][
-        "cash"
-    ]
+    sql = "SELECT cash from Users WHERE id = %s"
+    db.execute(sql, [session["user_id"]])
+    cash = db.fetchone()["cash"]
     portfolio_value = 0
 
     for stock in stocks_owned:
@@ -80,8 +89,6 @@ def index():
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
-    """Buy shares of stock"""
-
     if request.method == "GET":
         return render_template("buy.html")
 
@@ -100,27 +107,31 @@ def buy():
 
         total_price = quoted["price"] * shares
 
-        user_balance = db.execute(
-            "SELECT cash FROM users WHERE id = ?", session["user_id"]
-        )[0]["cash"]
+        sql = "SELECT cash FROM Users WHERE id = %s"
+        db.execute(sql, [session["user_id"]])
+        user_balance = db.fetchone()["cash"]
+
         if total_price > user_balance:
             return apology("balance", "insufficient")
 
         new_balance = user_balance - total_price
         try:
+            sql = "UPDATE users SET cash = %s WHERE id = %s"
+            db.execute(sql, [new_balance, session["user_id"]])
+            mysql_db.commit()
+
+            sql = "INSERT INTO Transactions (symbol, company, shares, user_id, price) VALUES (%s, %s, %s, %s, %s)"
             db.execute(
-                "UPDATE users SET cash = ? WHERE id = ?",
-                new_balance,
-                session["user_id"],
+                sql,
+                [
+                    symbol,
+                    quoted["company"],
+                    shares,
+                    session["user_id"],
+                    quoted["price"],
+                ],
             )
-            db.execute(
-                "INSERT INTO transactions (symbol, company, shares, user_id, price) VALUES (?, ?, ?, ?, ?)",
-                symbol,
-                quoted["company"],
-                shares,
-                session["user_id"],
-                quoted["price"],
-            )
+            mysql_db.commit()
         except Exception:
             return apology("error", "transaction")
 
@@ -147,59 +158,44 @@ def history():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Log user in"""
-
-    # Forget any user_id
     session.clear()
 
-    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Ensure username was submitted
         if not request.form.get("username"):
             return apology("must provide username", 403)
 
-        # Ensure password was submitted
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
-        # Query database for username
-        rows = db.execute(
-            "SELECT * FROM users WHERE username = ?", request.form.get("username")
-        )
+        sql = "SELECT id, hash FROM Users WHERE username = %s"
+        db.execute(sql, [request.form.get("username")])
+        user = db.fetchone()
+        print(user)
 
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(
-            rows[0]["hash"], request.form.get("password")
+        if not user or not check_password_hash(
+            user["hash"], request.form.get("password")
         ):
             return apology("invalid username and/or password", 403)
 
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = user["id"]
 
-        # Redirect user to home page
         return redirect("/")
 
-    # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("login.html")
 
 
 @app.route("/logout")
 def logout():
-    """Log user out"""
-
-    # Forget any user_id
     session.clear()
 
-    # Redirect user to login form
     return redirect("/")
 
 
 @app.route("/quote", methods=["GET", "POST"])
 @login_required
 def quote():
-    """Get stock quote."""
     if request.method == "GET":
         return render_template("quote.html")
 
@@ -214,8 +210,6 @@ def quote():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    """Register user"""
-
     if request.method == "GET":
         return render_template("register.html")
 
@@ -224,9 +218,14 @@ def register():
         if not username:
             return apology("not valid", "username")
 
-        db_username = db.execute("SELECT * FROM users WHERE username = ?", username)
-        if db_username == username:
-            return apology("already exists", "username")
+        try:
+            sql = "SELECT username FROM Users WHERE username = %s"
+            db.execute(sql, [username])
+            db_username = db.fetchone()["username"]
+            if db_username == username:
+                return apology("already exists", "username")
+        except TypeError:
+            db_username = None
 
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
@@ -238,22 +237,21 @@ def register():
             return apology("does not match", "password")
 
         password_hash = generate_password_hash(password)
-        db.execute(
-            "INSERT INTO users (username, hash) VALUES (?, ?)", username, password_hash
-        )
+        sql = "INSERT INTO Users (username, hash) VALUES (%s, %s)"
+        db.execute(sql, [username, password_hash])
+        mysql_db.commit()
+
     return redirect("/login")
 
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
-    """Sell shares of stock"""
-
     if request.method == "GET":
-        stocks_owned = db.execute(
-            "SELECT symbol, company, SUM(shares) AS shares FROM transactions WHERE user_id = ? GROUP BY company",
-            session["user_id"],
-        )
+        sql = "SELECT symbol, company, SUM(shares) AS shares FROM Transactions WHERE user_id = %s GROUP BY company"
+        db.execute(sql, [session["user_id"]])
+        stocks_owned = db.fetchall()
+
         return render_template("sell.html", stocks_owned=stocks_owned)
 
     if request.method == "POST":
@@ -267,29 +265,31 @@ def sell():
         if not symbol or not quoted:
             return apology("not valid", "symbol")
 
-        shares_owned = db.execute(
-            "SELECT SUM(shares) AS shares FROM transactions WHERE symbol = ? AND user_id = ?",
-            symbol,
-            session["user_id"],
-        )
+        sql = "SELECT SUM(shares) AS shares FROM Transactions WHERE symbol = %s AND user_id = %s"
+        db.execute(sql, [symbol, session["user_id"]])
+        shares_owned = db.fetchall()
+
         if not shares or shares <= 0 or shares > shares_owned:
             return apology("not valid", "share quantity")
 
         sale_value = quoted["price"] * shares
         try:
+            sql = "UPDATE Users SET cash = cash + % WHERE id = %s"
+            db.execute(sql, [sale_value, session["user_id"]])
+            mysql_db.commit()
+
+            sql = "INSERT INTO Transactions (symbol, company, shares, user_id, price) VALUES (%s, %s, %s, %s, %s)"
             db.execute(
-                "UPDATE users SET cash = cash + ? WHERE id = ?",
-                sale_value,
-                session["user_id"],
+                sql,
+                [
+                    symbol,
+                    quoted["company"],
+                    -shares,
+                    session["user_id"],
+                    quoted["price"],
+                ],
             )
-            db.execute(
-                "INSERT INTO transactions (symbol, company, shares, user_id, price) VALUES (?, ?, ?, ?, ?)",
-                symbol,
-                quoted["company"],
-                -shares,
-                session["user_id"],
-                quoted["price"],
-            )
+            mysql_db.commit()
         except Exception:
             return apology("error", "transaction")
 
@@ -297,12 +297,10 @@ def sell():
 
 
 def errorhandler(e):
-    """Handle error"""
     if not isinstance(e, HTTPException):
         e = InternalServerError()
     return apology(e.name, e.code)
 
 
-# Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
