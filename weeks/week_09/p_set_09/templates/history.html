@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block main %}
+<h1 class="mb-5">Transaction History</h1>
+<div class="container col-lg-8 my-3">
+    <table class="rounded table table-responsive table-striped table-hover align-middle">
+        <thead class="table-primary align-middle">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Price</th>
+                <th scope="col">At</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                {% for transaction in history %}
+            <tr>
+                <td>{{transaction["type"] | capitalize}}</td>
+                <td>{{transaction["shares"]}}</td>
+                <td>{{transaction["symbol"] | upper}}</td>
+                <td>{{transaction["price"] | usd}}</td>
+                <td>{{transaction["date"]}}</td>
+            </tr>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

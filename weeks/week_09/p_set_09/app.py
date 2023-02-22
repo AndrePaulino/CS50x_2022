@@ -130,8 +130,19 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
-    return apology("TODO")
+    sql = "SELECT symbol, shares, price, created_at AS date FROM Transactions WHERE user_id = %s GROUP BY created_at"
+    db.execute(sql, [session["user_id"]])
+    history = db.fetchall()
+
+    for transaction in history:
+        transaction["price"] = float(transaction["price"])
+        if transaction["shares"] > 0:
+            transaction["type"] = "buy"
+        else:
+            transaction["type"] = "sell"
+            transaction["shares"] += -transaction["shares"] * 2
+
+    return render_template("history.html", history=history)
 
 
 @app.route("/login", methods=["GET", "POST"])
