@@ -60,7 +60,7 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    sql = "SELECT symbol, company, CAST(SUM(shares) AS INT) AS shares, SUM(price * shares) AS exposure FROM Transactions WHERE user_id = %s GROUP BY company HAVING shares > 0"
+    sql = "SELECT symbol, company, CAST(SUM(shares) AS SIGNED) AS shares, SUM(price * shares) AS exposure FROM Transactions WHERE user_id = %s GROUP BY company, symbol"
     db.execute(sql, [session["user_id"]])
     stocks_owned = db.fetchall()
 
@@ -253,7 +253,7 @@ def register():
 @login_required
 def sell():
     if request.method == "GET":
-        sql = "SELECT symbol, company, CAST(SUM(shares) AS INT) AS shares FROM Transactions WHERE user_id = %s GROUP BY company HAVING shares > 0"
+        sql = "SELECT symbol, company, CAST(SUM(shares) AS SIGNED) AS shares FROM Transactions WHERE user_id = %s GROUP BY company HAVING shares > 0"
         db.execute(sql, [session["user_id"]])
         stocks_owned = db.fetchall()
 
@@ -267,7 +267,7 @@ def sell():
         if not symbol or not quoted:
             return apology("not valid", "symbol")
 
-        sql = "SELECT CAST(SUM(shares) AS INT) AS shares FROM Transactions WHERE symbol = %s AND user_id = %s"
+        sql = "SELECT CAST(SUM(shares) AS SIGNED) AS shares FROM Transactions WHERE symbol = %s AND user_id = %s"
         db.execute(sql, [symbol, session["user_id"]])
         shares_owned = db.fetchone()["shares"]
 
