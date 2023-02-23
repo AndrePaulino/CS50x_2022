@@ -55,8 +55,7 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    sql = "SELECT symbol, company, SUM(shares) AS shares, SUM(price * shares) AS exposure FROM Transactions WHERE user_id = %s AND shares > 0 GROUP BY company"
+    sql = "SELECT symbol, company, CAST(SUM(shares) AS INT) AS shares, SUM(price * shares) AS exposure FROM Transactions WHERE user_id = %s GROUP BY company HAVING shares > 0"
     db.execute(sql, [session["user_id"]])
     stocks_owned = db.fetchall()
 
@@ -67,7 +66,7 @@ def index():
 
     for stock in stocks_owned:
         quote = lookup(stock["symbol"])
-        price = quote["price"] if quote["is_market_open"] else quote["previous_close"]
+        price = quote["price"]
         stock["current_price"] = price
         stock["holding_value"] = stock["shares"] * price
         stock["holding_growth"] = stock["holding_value"] - stock["exposure"]
@@ -96,8 +95,6 @@ def buy():
         symbol = request.form.get("symbol")
         shares = int(request.form.get("shares"))
         quoted = lookup(symbol)
-        if not quoted["is_market_open"]:
-            return apology("closed", "market")
 
         if not symbol or not quoted:
             return apology("not valid", "symbol")
@@ -116,23 +113,27 @@ def buy():
 
         new_balance = user_balance - total_price
         try:
-            sql = "UPDATE users SET cash = %s WHERE id = %s"
+            sql = "UPDATE Users SET cash = %s WHERE id = %s"
             db.execute(sql, [new_balance, session["user_id"]])
-            mysql_db.commit()
 
             sql = "INSERT INTO Transactions (symbol, company, shares, user_id, price) VALUES (%s, %s, %s, %s, %s)"
-            db.execute(
-                sql,
-                [
-                    symbol,
-                    quoted["company"],
-                    shares,
-                    session["user_id"],
-                    quoted["price"],
-                ],
-            )
+            val = [
+                symbol,
+                quoted["company"],
+                shares,
+                session["user_id"],
+                quoted["price"],
+            ]
+            db.execute(sql, val)
             mysql_db.commit()
-        except Exception:
+
+            if not quoted["is_market_open"]:
+                message = f"Stock bought for previous close price: ${quoted['price']}"
+                flash("Market Closed", "info")
+                flash(message, "info")
+
+        except Exception as error:
+            print(error)
             return apology("error", "transaction")
 
         return redirect("/")
@@ -171,7 +172,6 @@ def login():
         sql = "SELECT id, hash FROM Users WHERE username = %s"
         db.execute(sql, [request.form.get("username")])
         user = db.fetchone()
-        print(user)
 
         if not user or not check_password_hash(
             user["hash"], request.form.get("password")
@@ -248,7 +248,7 @@ def register():
 @login_required
 def sell():
     if request.method == "GET":
-        sql = "SELECT symbol, company, SUM(shares) AS shares FROM Transactions WHERE user_id = %s GROUP BY company"
+        sql = "SELECT symbol, company, CAST(SUM(shares) AS INT) AS shares FROM Transactions WHERE user_id = %s GROUP BY company HAVING shares > 0"
         db.execute(sql, [session["user_id"]])
         stocks_owned = db.fetchall()
 
@@ -259,38 +259,38 @@ def sell():
         shares = int(request.form.get("shares"))
         quoted = lookup(symbol)
 
-        if not quoted["is_market_open"]:
-            return apology("closed", "market")
-
         if not symbol or not quoted:
             return apology("not valid", "symbol")
 
-        sql = "SELECT SUM(shares) AS shares FROM Transactions WHERE symbol = %s AND user_id = %s"
+        sql = "SELECT CAST(SUM(shares) AS INT) AS shares FROM Transactions WHERE symbol = %s AND user_id = %s"
         db.execute(sql, [symbol, session["user_id"]])
-        shares_owned = db.fetchall()
+        shares_owned = db.fetchone()["shares"]
 
         if not shares or shares <= 0 or shares > shares_owned:
             return apology("not valid", "share quantity")
 
         sale_value = quoted["price"] * shares
         try:
-            sql = "UPDATE Users SET cash = cash + % WHERE id = %s"
+            sql = "UPDATE Users SET cash = cash + %s WHERE id = %s"
             db.execute(sql, [sale_value, session["user_id"]])
-            mysql_db.commit()
 
             sql = "INSERT INTO Transactions (symbol, company, shares, user_id, price) VALUES (%s, %s, %s, %s, %s)"
-            db.execute(
-                sql,
-                [
-                    symbol,
-                    quoted["company"],
-                    -shares,
-                    session["user_id"],
-                    quoted["price"],
-                ],
-            )
+            val = [
+                symbol,
+                quoted["company"],
+                -shares,
+                session["user_id"],
+                quoted["price"],
+            ]
+            db.execute(sql, val)
             mysql_db.commit()
-        except Exception:
+
+            if not quoted["is_market_open"]:
+                message = f"Stock sold for previous close price: ${quoted['price']}"
+                flash("Market Closed", "info")
+                flash(message, "info")
+        except Exception as error:
+            print(error)
             return apology("error", "transaction")
 
         return redirect("/")

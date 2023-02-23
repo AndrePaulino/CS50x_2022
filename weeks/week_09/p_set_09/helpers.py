@@ -77,19 +77,24 @@ def lookup(symbol):
     except requests.RequestException:
         return None
 
-    # Parse response
     try:
         quote = response_quote.json()
         price = response_price.json()
-        return {
+        final_price = (
+            float(price["price"])
+            if quote["is_market_open"]
+            else float(quote["previous_close"])
+        )
+        quoted = {
             "company": quote["name"],
             "previous_close": float(quote["previous_close"]),
             "symbol": quote["symbol"],
             "currency": quote["currency"],
             "exchange": quote["exchange"],
-            "price": float(price["price"]),
+            "price": final_price,
             "is_market_open": quote["is_market_open"],
         }
+        return quoted
     except (KeyError, TypeError, ValueError):
         return None
 
