@@ -36,8 +36,13 @@ Session(app)
 
 try:
     mysql_db = mysql.connector.connect(
-        host="localhost", user="apaulino", password="9632", db="p_set_09_finance"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        port=os.getenv("DB_PORT"),
+        db=os.getenv("DB_NAME"),
     )
+
     db = mysql_db.cursor(dictionary=True)
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
