@@ -12,7 +12,7 @@
 ## Achievement
 
 - [x] Lab 8: Birthdays
-- [ ] Finance
+- [x] Finance
 
 ## Description
 
@@ -31,5 +31,6 @@ Vercel does not support local storage the SQLite needs for writing operations, s
 <img src="../../images/birthdays_preview.png" alt="lab 09 birthdays preview" height="450"/>
 
 ### Homepage Finance
+
 <img src="../../images/finance_result.png" alt="problem finance" height="100"/>
 <img src="../../images/finance_preview.png" alt="problem set 09 finance" height="450"/>
